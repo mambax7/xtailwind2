@@ -41,7 +41,7 @@ The default light palette is `atelier`. The default dark palette is `noctis`.
 - `tailwind.config.js`
   Tailwind scanning rules, font stacks, custom shadows/radius, and all six DaisyUI palettes.
 - `theme_autorun.php`
-  Registers `XoopsFormRendererTailwind` and passes the curated palette list to Smarty as `xtailwindThemes`.
+  Selects the best available form renderer (`XoopsFormRendererTailwind` if present in XOOPS core, otherwise falls back to `XoopsFormRendererBootstrap5`) and passes the curated palette list to Smarty as `xtailwindThemes`.
 
 ## Theme behavior
 
@@ -60,7 +60,7 @@ This lets the mode toggle switch between remembered light and dark palettes inst
 - The root `<html>` starts with `data-theme="atelier"`, then swaps to the remembered theme before paint.
 - The homepage gets a dedicated hero section when `$xoops_page == "index"`.
 - Footer blocks render as lighter support panels instead of repeating the full card treatment from the sidebars.
-- The theme uses `XoopsFormRendererTailwind`, so forms should stay closer to the rest of the Tailwind shell.
+- The theme prefers `XoopsFormRendererTailwind` (XOOPS 2.5.13+) so forms stay aligned with the rest of the Tailwind shell. On older XOOPS versions without that renderer, it gracefully falls back to `XoopsFormRendererBootstrap5` — forms still render correctly because DaisyUI aliases most Bootstrap 5 form component classes.
 
 ## Build workflow
 
